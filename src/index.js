@@ -1,2 +1,2 @@
-const message = 'Hello from index.js';
+var message = 'Hello from index.js';
 console.log(message);

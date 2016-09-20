@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var ObjectId = mongodb.ObjectID;
 
+
 var LISTS_COLLECTION = 'lists';
 
 var app = express();
@@ -11,6 +12,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 var db;
+
+app.all('/*', function(req, res) {
+  res.send('hello world');
+});
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, database) {
   if (err) {
@@ -30,6 +35,8 @@ function handleError(res, reason, message, code) {
   console.log('ERROR: ' + reason);
   res.status(code || 500).json({'error': message});
 }
+
+
 
 // app.get('/lists', function(req, res) {
 // });
