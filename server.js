@@ -3,16 +3,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+mongoose.connect('mongodb://heroku_fnjw7508:3jlnk9k1nm9a83jfa3h1lv70c0@ds035786.mlab.com:35786/heroku_fnjw7508');
+
 var app = express();
 
-//config files
-var db = require('./config.js');
-
-//port
-var port = process.env.PORT || 8080;
-
-//connect to database
-//mongoose.connect(db.url);
+app.use(express.static(__dirname + '/public')); 
 
 // parse application/json 
 app.use(bodyParser.json()); 
@@ -26,19 +21,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(methodOverride('X-HTTP-Method-Override')); 
 
-// set the static files location /public/img will be /img for users
-app.use(express.static(__dirname + '/public')); 
+// Routes
+app.use('/api', require('./routes/api'));
 
-// routes 
-require('./app/routes')(app); // configure our routes
+var port = process.env.PORT || 8080;
 
-// start app 
-// startup our app at http://localhost:8080
 app.listen(port);               
-
-// shoutout to the user                     
+           
 console.log('Magic happens on port ' + port);
-
-// expose app           
+   
 exports = module.exports = app;                         
 
