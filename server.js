@@ -12,7 +12,7 @@ var db = require('./config.js');
 var port = process.env.PORT || 8080;
 
 //connect to database
-mongoose.connect(db.url);
+//mongoose.connect(db.url);
 
 // parse application/json 
 app.use(bodyParser.json()); 
