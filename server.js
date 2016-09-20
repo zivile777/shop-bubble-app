@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
@@ -15,7 +16,7 @@ var db;
 app.all('/*', function(req, res) {
   res.send('hello world');
 });
-
+require('./config/routes.js')(app, express);
 // Connect to the database before starting the application server.
 mongoose.connect(process.env.MONGODB_URI, function (err, database) {
   if (err) {
