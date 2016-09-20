@@ -2,6 +2,8 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+// routes 
+require('./app/routes')(app); // configure our routes
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -32,3 +34,5 @@ mongoose.connect(process.env.MONGODB_URI, function (err, database) {
     console.log("App now running on port", port);
   });
 });
+
+module.exports = app;
