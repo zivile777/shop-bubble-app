@@ -1,47 +1,44 @@
+//modules
 var express = require('express');
-var path = require('path');
 var bodyParser = require('body-parser');
-var mongodb = require('mongodb');
-var ObjectId = mongodb.ObjectID;
-
-
-var LISTS_COLLECTION = 'lists';
+var methodOverride = require('method-override');
 
 var app = express();
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
 
-var db;
+//config files
+var db = require('./config.js');
 
-app.all('/*', function(req, res) {
-  res.send('hello world');
-});
+//port
+var port = process.env.PORT || 8080;
 
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-  db = database;
-  console.log('Database connection ready');
+//connect to database
+mongoose.connect(db.url);
 
-  var server = app.listen(process.env.PORT || 8080, function() {
-    var port = server.address().port;
-    console.log('App now running on port ', port);
-  });
-});
+// parse application/json 
+app.use(bodyParser.json()); 
 
-function handleError(res, reason, message, code) {
-  console.log('ERROR: ' + reason);
-  res.status(code || 500).json({'error': message});
-}
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); 
 
+// override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
+app.use(methodOverride('X-HTTP-Method-Override')); 
 
-// app.get('/lists', function(req, res) {
-// });
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public')); 
 
-// app.post('/lists', function(req, res) {
-// });
+// routes 
+require('./app/routes')(app); // configure our routes
 
-// app.get('/lists/:')
+// start app 
+// startup our app at http://localhost:8080
+app.listen(port);               
+
+// shoutout to the user                     
+console.log('Magic happens on port ' + port);
+
+// expose app           
+exports = module.exports = app;                         
+
