@@ -18,7 +18,7 @@ app.all('/*', function(req, res) {
 });
 
 // Connect to the database before starting the application server.
-mongoose.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+mongoose.connect(process.env.MONGODB_URI, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
