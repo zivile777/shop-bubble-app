@@ -2,9 +2,10 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+var mongoose = require('mongoose');
+//var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "contacts";
+//var CONTACTS_COLLECTION = "contacts";
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -17,7 +18,7 @@ app.all('/*', function(req, res) {
 });
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+mongoose.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
