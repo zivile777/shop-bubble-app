@@ -1,0 +1,31 @@
+<html ng-app="shopBubble">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop Bubble App</title>  
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script> 
+  <script src="js/core.js"></script>
+  <script src="js/controllers/main.js"></script> 
+  <script src="js/services/listItemService.js"></script> 
+</head>
+<body ng-controller="mainController">
+  <div class="ng-scope layout-padding layout-margin layout-row ">
+    <h1 ng-style="headerCircle">My Shopping Bubble</h1>  
+    <form>
+      <input class="layout-margin layout-padding" type="text" placeholder="Need to shop for..." ng-model="formData.text" ng-required='true'>
+      <button class="layout-margin layout-padding" type="submit" ng-click="createItem()">Add bubble</button>
+    </form>
+    <div class="ng-scope flex layout-row layout-wrap layout-margin layout-padding">
+      <div ng-style="itemCircle" ng-repeat="item in items" ng-click="deleteItem(item._id)">
+        <label>
+            <span >{{ item.text }}</span>
+          </label>
+      </div>
+    </div>    
+    </div>
+</body>
+</html>
