@@ -7,7 +7,7 @@
   var database = require('./config/database');
   var port     = process.env.PORT || 8888;
 
-  mongoose.connect(database.url);
+  mongoose.connect(process.env.MONGOLAB_URI || database.url);
 
   app.use(express.static(__dirname + '/public')); 
   app.use(morgan('dev'));

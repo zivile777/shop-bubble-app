@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('ListItem', {
+var ListItemSchema = mongoose.Schema({
   text : String,
   done : Boolean
 });
+
+module.exports = mongoose.model('ListItem', ListItemSchema);
