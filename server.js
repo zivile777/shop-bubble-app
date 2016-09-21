@@ -7,7 +7,7 @@
   var database = require('../config/database');
   var port     = process.env.PORT || 8888;
 
-  mongoose.connect(process.env.MONGOLAB_URI || database.url);
+  mongoose.connect(database.url);
 
   app.use(express.static(__dirname + '/public')); 
   app.use(morgan('dev'));
@@ -20,3 +20,5 @@
 
   app.listen(port);
   console.log("App listening on port : " + port);
+
+  module.exports = app;
