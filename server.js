@@ -4,10 +4,10 @@
   var morgan   = require('morgan');
   var bodyParser = require('body-parser');
   var methodOverride = require('method-override');
-  var database = require('../config/database');
+  var database = require('config/database');
   var port     = process.env.PORT || 8888;
 
-  mongoose.connect(database.url);
+  mongoose.connect(process.env.MONGOLAB_URI || database.url);
 
   app.use(express.static(__dirname + '/public')); 
   app.use(morgan('dev'));
@@ -16,7 +16,7 @@
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
   app.use(methodOverride());
 
-  require('./app/routes.js')(app);
+  require('app/routes.js')(app);
 
   app.listen(port);
   console.log("App listening on port : " + port);
