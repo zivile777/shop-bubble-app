@@ -24,7 +24,7 @@ angular.module('ListItemController', [])
     },
 
     $scope.formData = {};
-    $http.get('/api/items')
+    $http.get('/items')
       .success(function(data) {
         $scope.items = data;
       })
@@ -33,7 +33,7 @@ angular.module('ListItemController', [])
       });
 
       $scope.createItem = function() {
-        $http.post('/api/items', $scope.formData)
+        $http.post('/items', $scope.formData)
           .success(function(data) {
               $scope.formData = {}; 
               $scope.items = data;
@@ -44,7 +44,7 @@ angular.module('ListItemController', [])
       };
 
       $scope.deleteItem = function(id) {
-        $http.delete('/api/items/' + id)
+        $http.delete('/items/' + id)
           .success(function(data) {
             $scope.items = data;
           })

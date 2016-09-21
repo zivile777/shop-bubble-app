@@ -2,13 +2,13 @@ angular.module('ListItemService', [])
   .factory('ListItem', function($http) {
     return {
       get : function() {
-        return $http.get('/api/items');
+        return $http.get('/items');
       },
-      create : function(todoData) {
-        return $http.post('/api/items', itemData);
+      create : function(itemData) {
+        return $http.post('/items', itemData);
       },
       delete : function(id) {
-        return $http.delete('/api/items/' + id);
+        return $http.delete('/items/' + id);
       }
     }
   });

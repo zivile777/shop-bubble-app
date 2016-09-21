@@ -2,14 +2,14 @@
 var ListItem = require('./models/list');
 
 module.exports = function(app) {
-  app.get('/api/items', function(req, res) {
+  app.get('/items', function(req, res) {
     ListItem.find(function(err, items) {
       if (err) res.send(err)
       res.json(items); 
     });
   });
  
-  app.post('/api/items', function(req, res) {    
+  app.post('/items', function(req, res) {    
     ListItem.create({
       text : req.body.text,
       done : false
@@ -22,7 +22,7 @@ module.exports = function(app) {
       });
   });
 
-  app.delete('/api/items/:item_id', function(req, res) {
+  app.delete('/items/:item_id', function(req, res) {
     ListItem.remove({
       _id : req.params.item_id
     }, function(err, item) {
