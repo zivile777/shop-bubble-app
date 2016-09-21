@@ -4,7 +4,7 @@
   var morgan   = require('morgan');
   var bodyParser = require('body-parser');
   var methodOverride = require('method-override');
-  var database = require('./config/database');
+  var database = require('../config/database');
   var port     = process.env.PORT || 8888;
 
   mongoose.connect(process.env.MONGOLAB_URI || database.url);
