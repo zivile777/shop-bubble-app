@@ -1,5 +1,5 @@
 {
-  "name": "shopbubble",
+  "name": "shop-bubble",
   "version": "1.0.0",
   "description": "Simple shopping list application",
   "main": "server.js",
