@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
 var ListItemSchema = mongoose.Schema({
-  text : String,
-  done : Boolean
+  text : String
 });
 
 module.exports = mongoose.model('ListItem', ListItemSchema);
