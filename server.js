@@ -1,13 +1,11 @@
   var express  = require('express');
   var mongoose = require('mongoose');
-  var path = require("path"); 
   var morgan   = require('morgan');
   var bodyParser = require('body-parser');
   var app      = express();    
   var port     = process.env.PORT || 8888;
 
-  mongoose.connect(process.env.MONGODB_URI || database.url,
-, function(err) {
+  mongoose.connect(process.env.MONGODB_URI, function(err) {
     if (err) {
       console.log('error conncectin to database: ', err);
     } else{
