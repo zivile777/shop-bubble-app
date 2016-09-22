@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var ListItemSchema = mongoose.Schema({
+var ListItemSchema = new mongoose.Schema({
   text : String
 });
 

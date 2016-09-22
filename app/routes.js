@@ -1,5 +1,5 @@
-
 var ListItem = require('./models/list');
+var app = require('../server.js');
 
 module.exports = function(app) {
   app.get('/items', function(req, res) {
@@ -11,8 +11,7 @@ module.exports = function(app) {
  
   app.post('/items', function(req, res) {    
     ListItem.create({
-      text : req.body.text,
-      done : false
+      text : req.body.text
     }, function(err, item) {
         if (err) res.send(err);
         ListItem.find(function(err, items) {
