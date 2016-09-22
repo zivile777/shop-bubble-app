@@ -5,7 +5,7 @@
   var app      = express();    
   var port     = process.env.PORT || 8888;
 
-  mongoose.connect(process.env.MONGODB_URI, function(err) {
+  mongoose.connect(process.env.MONGO_URI, function(err) {
     if (err) {
       console.log('error conncectin to database: ', err);
     } else{
